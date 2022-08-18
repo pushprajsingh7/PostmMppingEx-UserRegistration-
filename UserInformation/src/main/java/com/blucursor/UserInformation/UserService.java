@@ -22,7 +22,7 @@ public class UserService {
 		Userrepo.save(user);
 	}
 
-	public List<User> emailIdValidation() {
+	public List<String> emailIdValidation() {
 		return Userrepo.listOfEmailId();
 	}
 
