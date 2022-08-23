@@ -1,6 +1,5 @@
 package com.blucursor.UserInformation;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,36 +13,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 @RestController
 public class UserController {
 	@Autowired
 	public UserRepository Userrepo;
-     List<String>  DBemails=new ArrayList<>();
+
+	List<String> DBemails = new ArrayList<>();
 	@Autowired
 	private UserService service;
 
 	@PostMapping("/adduser")
-	
+
 	public void inputvalue(@RequestBody User user) {
-        service.save(user);
-	}	
-	
-	@PostMapping("/validate")
-     public boolean validate(@RequestBody Map<String,String> email) {
+		service.save(user);
+	}
+	@PostMapping("/delete")
+	public void deletevalue(@RequestBody Map<String, String> email) {
 		String payload = email.get("email");
-		System.out.println(payload);
-		boolean userFound=true;
-		DBemails= service.emailIdValidation();
-		System.out.println(DBemails);
-		for(String temp:DBemails) {
-			if(temp.trim().equalsIgnoreCase(payload))
-				return true;
+		service.delete(payload);
+	}
+        
+	@PostMapping("/validateEmail")
+	public boolean validate(@RequestBody Map<String, String> email) {
+		String payload = email.get("email");
+		boolean userFound = true;
+		DBemails = service.emailIdValidation();
+		for (String temp : DBemails) {
+			if (temp.trim().equals(payload)) {
+				return userFound;
+			}
 		}
 		return false;
-		}
-}
-		
-		
-	
+	}
 
+}
 

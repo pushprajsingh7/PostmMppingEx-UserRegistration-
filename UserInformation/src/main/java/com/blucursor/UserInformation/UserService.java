@@ -1,6 +1,8 @@
 package com.blucursor.UserInformation;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -26,4 +28,11 @@ public class UserService {
 		return Userrepo.listOfEmailId();
 	}
 
-}
+		void delete(String email) {
+			 int id=Userrepo.serialid(email);
+			 Userrepo.deleteById(id);
+			 
+	}
+	}
+
+
