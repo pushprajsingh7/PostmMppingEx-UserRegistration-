@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 public class UserController {
 	@Autowired
@@ -28,12 +26,22 @@ public class UserController {
 	public void inputvalue(@RequestBody User user) {
 		service.save(user);
 	}
+
 	@PostMapping("/delete")
 	public void deletevalue(@RequestBody Map<String, String> email) {
 		String payload = email.get("email");
 		service.delete(payload);
 	}
-        
+
+	@PostMapping("/password")
+	public boolean passwordvalidate(@RequestBody Map<String, String> payload) {
+		String payloadmail = payload.get("email");
+		String passwordInDB = service.validate(payloadmail);
+		String payloadPass = payload.get("password");
+		return passwordInDB.equals(payloadPass) ? true : false;
+
+	}
+
 	@PostMapping("/validateEmail")
 	public boolean validate(@RequestBody Map<String, String> email) {
 		String payload = email.get("email");
@@ -48,4 +56,3 @@ public class UserController {
 	}
 
 }
-

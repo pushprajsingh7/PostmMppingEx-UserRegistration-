@@ -15,5 +15,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query(value = "select userid from userinfo where email=:email", nativeQuery = true)
 	int serialid(@Param("email")String email);
 	
+	@Query(value = "select password from userinfo where email=:email", nativeQuery = true)
+	String validaterepo(@Param("email")String email);
+	
 	
 }
