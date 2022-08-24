@@ -24,10 +24,6 @@ public class UserService {
 		Userrepo.save(data);
 	}
 
-	public List<String> emailIdValidation() {
-		return Userrepo.listOfEmailId();
-	}
-
 	void delete(String email) {
 		int id = Userrepo.serialid(email);
 		Userrepo.deleteById(id);
@@ -41,4 +37,5 @@ public class UserService {
 	public List<String> check() {
 		return Userrepo.emailcheck();
 	}
+
 }

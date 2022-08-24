@@ -34,10 +34,17 @@ public class UserController {
 	}
 
 	@PostMapping("/delete")
-	public void deletevalue(@RequestBody Map<String, String> email) {
+	public boolean deletevalue(@RequestBody Map<String, String> email) {
 		String payload = email.get("email");
-		service.delete(payload);
-	}
+		if(!(service.check().contains(payload))) {
+			return false;
+		} else {
+			service.delete(payload);
+			return true;
+		}
+		}
+
+	
 
 	@PostMapping("/password")
 	public boolean passwordvalidate(@RequestBody Map<String, String> payload) {
@@ -52,7 +59,7 @@ public class UserController {
 	public boolean validate(@RequestBody Map<String, String> email) {
 		String payload = email.get("email");
 		boolean userFound = true;
-		DBemails = service.emailIdValidation();
+		DBemails = service.check();
 		for (String temp : DBemails) {
 			if (temp.trim().equals(payload)) {
 				return userFound;

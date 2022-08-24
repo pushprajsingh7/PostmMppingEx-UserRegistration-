@@ -9,9 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-	@Query(value = "select Email from userinfo", nativeQuery = true)
-	 List<String> listOfEmailId();
-	
 	@Query(value = "select userid from userinfo where email=:email", nativeQuery = true)
 	int serialid(@Param("email")String email);
 	
