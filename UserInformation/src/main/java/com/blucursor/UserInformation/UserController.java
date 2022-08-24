@@ -23,7 +23,7 @@ public class UserController {
 
 	@PostMapping("/adduser")
 
-	public boolean inputemail(@RequestBody User data) {
+	public boolean inputdata(@RequestBody User data) {
 		String payload = data.email;
 		if (service.check().contains(payload)) {
 			return false;
