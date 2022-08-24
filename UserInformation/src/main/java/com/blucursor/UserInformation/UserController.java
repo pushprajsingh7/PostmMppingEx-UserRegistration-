@@ -53,9 +53,6 @@ public class UserController {
 		String payload = email.get("email");
 		boolean userFound = true;
 		DBemails = service.emailIdValidation();
-		if (DBemails == null) {
-			return false;
-		}
 		for (String temp : DBemails) {
 			if (temp.trim().equals(payload)) {
 				return userFound;
