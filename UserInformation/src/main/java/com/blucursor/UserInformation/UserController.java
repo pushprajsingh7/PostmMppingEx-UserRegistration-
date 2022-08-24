@@ -47,6 +47,9 @@ public class UserController {
 	@PostMapping("/password")
 	public boolean passwordvalidate(@RequestBody Map<String, String> payload) {
 		String payloadmail = payload.get("email");
+		if (!(this.validate(payload))) {
+			return false;
+		}
 		String passwordInDB = service.validate(payloadmail);
 		String payloadPass = payload.get("password");
 		return passwordInDB.equals(payloadPass) ? true : false;
