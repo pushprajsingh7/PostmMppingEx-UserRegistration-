@@ -18,5 +18,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query(value = "select password from userinfo where email=:email", nativeQuery = true)
 	String validaterepo(@Param("email")String email);
 	
+	@Query(value = "select email from userinfo", nativeQuery = true)
+	List<String> emailcheck();
+
+	
 	
 }

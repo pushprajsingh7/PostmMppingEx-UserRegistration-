@@ -20,8 +20,8 @@ public class UserService {
 		return Userrepo.findAll();
 	}
 
-	public void save(User user) {
-		Userrepo.save(user);
+	public void save(User data) {
+		Userrepo.save(data);
 	}
 
 	public List<String> emailIdValidation() {
@@ -36,7 +36,11 @@ public class UserService {
 				String  pass=Userrepo.validaterepo(email);
 				return pass;
 			}
-			 
+
+
+		public List<String> check() {
+			return Userrepo.emailcheck();
+		}
 	}
 	
 

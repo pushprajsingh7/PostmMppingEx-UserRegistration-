@@ -23,11 +23,8 @@ public class UserController {
 
 	@PostMapping("/adduser")
 
-	public void inputemail(@RequestBody User email) {
-		service.save(email);
-	}
-	public void inputpassword(@RequestBody User password) {
-		service.save(password);
+	public void inputemail(@RequestBody User data) {
+		service.save(data);
 	}
 
 	@PostMapping("/delete")
