@@ -23,8 +23,14 @@ public class UserController {
 
 	@PostMapping("/adduser")
 
-	public void inputemail(@RequestBody User data) {
+	public boolean inputemail(@RequestBody User data) {
+		String payload=data.email;
+		if(service.check().contains(payload)) {
+			return false;
+		}else {
 		service.save(data);
+		return true;
+		}
 	}
 
 	@PostMapping("/delete")
