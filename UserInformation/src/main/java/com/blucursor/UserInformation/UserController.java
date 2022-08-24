@@ -36,15 +36,13 @@ public class UserController {
 	@PostMapping("/delete")
 	public boolean deletevalue(@RequestBody Map<String, String> email) {
 		String payload = email.get("email");
-		if(!(service.check().contains(payload))) {
+		if (!(this.validate(email))) {
 			return false;
 		} else {
 			service.delete(payload);
 			return true;
 		}
-		}
-
-	
+	}
 
 	@PostMapping("/password")
 	public boolean passwordvalidate(@RequestBody Map<String, String> payload) {
