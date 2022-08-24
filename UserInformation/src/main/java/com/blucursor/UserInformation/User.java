@@ -27,11 +27,7 @@ public class User {
 
 	@Column(name = "Password")
 	public String password;
-	//	public User(String fullName,String email,String password) {
-	//		this.fullName = fullName;
-	//		this.email=email;
-	//		this.password=password;
-	//	}
+
 
 	String getFullname() {
 		return fullname;

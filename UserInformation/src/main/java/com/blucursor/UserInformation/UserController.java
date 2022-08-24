@@ -24,12 +24,12 @@ public class UserController {
 	@PostMapping("/adduser")
 
 	public boolean inputemail(@RequestBody User data) {
-		String payload=data.email;
-		if(service.check().contains(payload)) {
+		String payload = data.email;
+		if (service.check().contains(payload)) {
 			return false;
-		}else {
-		service.save(data);
-		return true;
+		} else {
+			service.save(data);
+			return true;
 		}
 	}
 
@@ -53,6 +53,9 @@ public class UserController {
 		String payload = email.get("email");
 		boolean userFound = true;
 		DBemails = service.emailIdValidation();
+		if (DBemails == null) {
+			return false;
+		}
 		for (String temp : DBemails) {
 			if (temp.trim().equals(payload)) {
 				return userFound;

@@ -28,20 +28,17 @@ public class UserService {
 		return Userrepo.listOfEmailId();
 	}
 
-		void delete(String email) {
-			 int id=Userrepo.serialid(email);
-			 Userrepo.deleteById(id);
-		}
-			public String validate(String email) {
-				String  pass=Userrepo.validaterepo(email);
-				return pass;
-			}
-
-
-		public List<String> check() {
-			return Userrepo.emailcheck();
-		}
+	void delete(String email) {
+		int id = Userrepo.serialid(email);
+		Userrepo.deleteById(id);
 	}
-	
 
+	public String validate(String email) {
+		String pass = Userrepo.validaterepo(email);
+		return pass;
+	}
 
+	public List<String> check() {
+		return Userrepo.emailcheck();
+	}
+}
