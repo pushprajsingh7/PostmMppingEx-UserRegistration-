@@ -52,12 +52,10 @@ public class UserController {
 		}
 		String passwordInDB = service.validate(payloadmail);
 		String payloadPass = payload.get("password");
-		if(payloadPass!=null) {
+		
 		return passwordInDB.equals(payloadPass) ? true : false;
-		}
-		else {
-			return false;
-		}
+		
+		
 	}
 
 	@PostMapping("/validateEmail")
