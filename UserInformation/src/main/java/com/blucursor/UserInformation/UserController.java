@@ -23,41 +23,57 @@ public class UserController {
 
 	@PostMapping("/adduser")
 
-	public boolean inputdata(@RequestBody User data) {
-		if(data.email !=null && data.password!=null &&data.fullname!=null) {
-		String payload = data.email;
-		if (service.check().contains(payload)) {
-			return false;
-		} else {
-			service.save(data);
-			return true;
-		}}
-		return false;
+	public Map<String,String> inputdata(@RequestBody User data) {
+		Map<String, String> addUser = new HashMap<>();
+		if (data.email != null && data.password != null && data.fullname != null) {
+			String payload = data.email;
+			if (service.check().contains(payload)) {
+				addUser.put("email", "User already Exists");
+				return addUser;
+			} else {
+				addUser.put("email", "User Created");
+				service.save(data);
+				return addUser;
+			}
+		}
+		addUser.put("email","Please add Credentials");
+		return addUser;
 	}
 
 	@PostMapping("/delete")
-	public boolean deletevalue(@RequestBody Map<String, String> email) {
+	public Map<String, String> deletevalue(@RequestBody Map<String, String> email) {
+		Map <String,String> deleteUser= new HashMap<>();
 		String payload = email.get("email");
 		if (!(this.validate(email))) {
-			return false;
+			deleteUser.put("email","Incorrect email");
+			return deleteUser;
 		} else {
 			service.delete(payload);
-			return true;
+			deleteUser.put("email","User deleted");
+			return deleteUser;
 		}
 	}
 
 	@PostMapping("/password")
-	public boolean passwordvalidate(@RequestBody Map<String, String> payload) {
+	public Map <String,String> passwordValidate(@RequestBody Map<String, String> payload) {
+		Map <String,String> login= new HashMap<>();
 		String payloadmail = payload.get("email");
 		if (!(this.validate(payload))) {
-			return false;
+			login.put("email","Incorrect email");
+			login.put("password","checking password");
+			return login;
 		}
 		String passwordInDB = service.validate(payloadmail);
 		String payloadPass = payload.get("password");
-		
-		return passwordInDB.equals(payloadPass) ? true : false;
-		
-		
+		if (passwordInDB.equals(payloadPass)) {
+			login.put("email","correct email");
+			login.put("password", "correct password");
+			return login;
+		} else {
+			login.put("email","correct email");
+			login.put("password", "incorrect password");
+			return login;
+		}
 	}
 
 	@PostMapping("/validateEmail")
